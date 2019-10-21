@@ -10,6 +10,7 @@
     <button @click="randomPokemon">Novi pokemon</button>
     <p>Tip: {{pokemonType}}</p>
     <p v-if="this.pokemonType2">Tip: {{pokemonType2}}</p>
+    <p>{{status}}</p>
   </div>
 </template>
 
@@ -30,7 +31,7 @@ export default {
 
   mounted() {
     this.randomPokemon();
-    this.createPokemonList(151);
+    this.createPokemonList(3);
   },
   methods: {
     createPokemonList(max) {
@@ -46,7 +47,7 @@ export default {
 
     randomNumber() {
       let min = 1;
-      let max = 151;
+      let max = 3;
       let random = Math.floor(Math.random() * (max - min + 1)) + min;
       this.number = random;
       return random;
@@ -67,6 +68,14 @@ export default {
 
     checkAnswer() {
       if (this.answer.toLowerCase() === this.pokemon.name.toLowerCase()) {
+
+        this.$store.state.pokemonAll[this.pokemon.id] = {
+          name: this.pokemon.name,
+          img: this.pokemon.sprites.front_default,
+          stats: this.pokemon.stats
+        };
+        console.log("točno," + this.$store.state.pokemonAll[this.number].name);
+         console.log("Pokemon broj: ", this.$store.state.pokemonAll);
         this.status = "točno";
         this.randomPokemon();
         this.answer = "";
@@ -82,6 +91,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 h3 {
   margin: 40px 0 0;
 }
