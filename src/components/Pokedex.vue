@@ -51,6 +51,7 @@ export default {
   grid-column-gap: 15px;
   grid-row-gap: 15px;
     overflow: scroll;
+    padding-right: 10px;
 }
 
 .pokemon__stats {
@@ -74,11 +75,12 @@ export default {
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background:linear-gradient(rgb(70, 187, 171), rgb(113, 122, 202)); 
+    background: #fdd2eb83; 
+    border-radius: 25px;
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background:linear-gradient(rgb(113, 122, 202), rgb(70, 187, 171)); 
+    background:#fae2f0; 
   }
 </style>

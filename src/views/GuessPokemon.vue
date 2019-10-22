@@ -9,6 +9,9 @@
           <p v-if="this.pokemonType2">Tip: {{pokemonType2}}</p> -->
         </div>
       </div>
+      <div class="progressbar__container">
+        <div class="progressbar__status" :style="{width: percent + '%'}"> </div>
+      </div>
       <div class="pokemon__game--answer">
         <input v-model="answer" type="text" />
         <br />
@@ -30,12 +33,17 @@ export default {
       pokemonType: null,
       pokemonType2: null,
       answer: "",
+      correct: 0,
+      percent: 0
     };
   },
 
   mounted() {
     this.createPokemonList();
     this.randomPokemon();
+  },
+  updated(){
+    this.calcCorrect();
   },
   methods: {
     createPokemonList() {
@@ -91,11 +99,16 @@ export default {
         console.log("Pokemon broj: ", this.$store.state.pokemonAll);
         this.randomPokemon();
         this.answer = "";
+        this.correct++;
       } else {
         this.randomPokemon();
         this.answer = "";
          console.log("id svih pokemona: ", typeof(this.pokemon.types[0].type.name));
       }
+    },
+    calcCorrect() {
+      let max = 15;
+      this.percent = (this.correct/max)*100;
     }
   }
 };
@@ -105,11 +118,11 @@ export default {
 <style scoped>
 .pokemon__game--main {
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 2fr 1fr 1fr;
   width: 80%;
   height: 100%;
   justify-items: center;
-  margin: auto;
+  margin: 10% auto;
   padding: 0 30px;
   position: relative;
   background-image: url(../../public/pokeball.png);
@@ -145,5 +158,17 @@ img {
 }
 .pokemon__game--answer {
   align-self: center;
+}
+.progressbar__container{
+  width: 80%;
+  background: #ffffff57;
+  height: 20px;
+  border-radius: 5px;
+}
+.progressbar__status{
+  width: 20%;
+  background: #ffffb1a6;
+  height: 20px;
+  border-radius: 5px;
 }
 </style>
