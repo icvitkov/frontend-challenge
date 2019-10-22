@@ -1,32 +1,59 @@
 <template>
-    <div class="pokedex">
-        <div class="pokedex__container">
-          <div class="pokemon__list">
-               <pokedexItem></pokedexItem>
-          </div>
-          <div class="pokemon__stats">Pokemon stats</div>
-        </div>
+  <div class="pokedex-container">
+    <div class="pokedex__list" v-if="pokemonList">
+      <pokemon-item
+        v-for="pokemon in pokemonList"
+        :key="pokemon.id"
+        :pokemonName="pokemon.name"
+        :id="pokemon.id"
+        :img="pokemon.img"
+      ></pokemon-item>
     </div>
+    <div v-else>Nema pokemona</div>
+  </div>
 </template>
 
 <script>
+// @ is an alias to /src
+
+import PokemonItem from "@/components/PokedexItem.vue";
+
 export default {
-    data(){
-        return{
-            bla: 'bla',
-        }
-    }
-}
+  name: "home",
+  components: {
+    PokemonItem
+  },
+  data() {
+    return {
+      /*   pokemonList: this.$store.state.pokemonAll */
+      pokemonList: 
+       this.$store.state.pokemonAll
+      
+    };
+  },
+   mounted() {
+    this.console();
+  },
+  methods: {
+      console(){
+          console.log("bla ", this.pokemonList );
+      }
+  }
+};
 </script>
 <style scoped>
-.pokedex__container{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.pokedex__list {
+  display: grid;
+  width: 100%;
+  position: relative;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
 }
-.pokemon__list{
-    background: rgb(216, 69, 69);
+.pokem {
+  background: rgba(216, 69, 69, 0.062);
 }
-.pokemon__stats{
-    background: rgb(76, 109, 216);
+.pokemon__stats {
+  background: rgb(9, 23, 70);
 }
 </style>
