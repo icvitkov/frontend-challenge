@@ -1,41 +1,53 @@
 <template>
-    <div class="pokedex-item">
-        <div class="pokedex__item--container">
-          <div class="pokemon__img">
-              <img class="question" v-if="poznati" src="../assets/question.png" alt="">
-          </div>
-        </div>
+  <div>
+    <div v-if="this.pokemonName" class="pokemon-item">
+      <p class="guessed">#{{id}} {{pokemonName}}</p>
+      <img class="image" :src="img" />
     </div>
+    <div v-else class="pokemon-item">
+      <p>#{{id}}</p>
+      <i class="fas fa-question"></i>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    data(){
-        return{
-            bla: 'bla',
-            poznati: true,
-        }
-    },
+  name: "PokemonItem",
+  props: {
+    pokemonName: String,
+    img: String,
+    id: Number,
+    stats: Array
+  },
 
-    methods: {
-     
-    }
-}
+};
 </script>
+
 <style scoped>
-.pokedex__item--container{
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    height: 300px;
+.pokemon-item {
+  display: grid;
+  grid-template-rows: 1fr 3fr;
+  border-radius: 5px;
+  height: 200px;
+  background-color: #49d0b0;
+  justify-content: center;
 }
-.pokemon__list{
-    background: rgb(216, 69, 69);
+.image {
+  height: 100px;
+  justify-self: center;
 }
-.pokemon__stats{
-    background: rgb(76, 109, 216);
-}
-.question{
-    height: 200px;
+.fas{
+  font-size: 50px;
+  color: #ffffff57;
+  margin-top: 25px;
 }
 
+p{
+  font-size: 20px;
+  color: #ffffff57;
+}
+.guessed{
+  color: white;
+}
 </style>
