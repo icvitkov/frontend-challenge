@@ -4,6 +4,7 @@ body{
     height: 100%;
     left: 0;
     margin: 0;
+    border-color:#ffffff57;
 }
 
 button{
@@ -25,4 +26,26 @@ input{
     color: white;
     outline: none;
     font-size: 25px;
+}
+
+
+
+.name{
+    text-transform: capitalize;
+}
+.default{
+    background-color: #49d0b0;
+}
+
+.default__list{
+    background-color: #49d0b0;
+    border-radius: 5px;
+}
+
+.water{
+    background: #89cff0;
+}
+
+.fire{
+    background: rgb(197, 70, 70);
 }

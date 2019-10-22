@@ -1,9 +1,9 @@
 <template>
   <div class="pokemon__game" v-if="pokemon">
-    <div class="pokemon__game--main">
+    <div class="pokemon__game--main default" :class="[pokemonType2, pokemonType]">
       <div class="pokemon__game--container">
         <p>Nasumični pokemon: {{pokemon.name}}</p>
-        <div :class="[pokemonType2, pokemonType]" class="pokemon__img--container">
+        <div  class="pokemon__img--container">
           <img :src="pokemon.sprites.front_default" alt />
        <!--    <p>Tip: {{pokemonType}}</p>
           <p v-if="this.pokemonType2">Tip: {{pokemonType2}}</p> -->
@@ -40,7 +40,7 @@ export default {
   methods: {
     createPokemonList() {
       let pokemonList = {};
-      let max = 10;
+      let max = 15;
       for (let min = 1; min <= max; min++) {
         pokemonList[min] = {
           id: min
@@ -52,13 +52,14 @@ export default {
 
     randomNumber() {
       let min = 1;
-      let max = 3;
+      let max = 15;
       let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
       if (this.$store.state.pokemonAll[randomNum].name) {
         return this.randomNumber(); // recursive function
       } else {
         return randomNum;
       }
+    
     },
 
     async randomPokemon() {
@@ -70,7 +71,7 @@ export default {
       if (pokemon.types[1]) {
         this.pokemonType2 = pokemon.types[1].type.name;
       } else {
-        this.pokemonType2 = null;
+        this.pokemonType2 = "";
       }
     },
 
@@ -80,10 +81,12 @@ export default {
           id: this.pokemon.id,
           name: this.pokemon.name,
           img: this.pokemon.sprites.front_default,
-          stats: this.pokemon.stats
+          stats: this.pokemon.stats,
+          type1: this.pokemon.types[0].type.name,
+          type2: this.pokemonType2
         };
         console.log(
-          "točno," + this.$store.state.pokemonAll[this.pokemon.id].name
+          "točno," + this.$store.state.pokemonAll[this.pokemon.id].type1
         );
         console.log("Pokemon broj: ", this.$store.state.pokemonAll);
         this.randomPokemon();
@@ -91,6 +94,7 @@ export default {
       } else {
         this.randomPokemon();
         this.answer = "";
+         console.log("id svih pokemona: ", typeof(this.pokemon.types[0].type.name));
       }
     }
   }
@@ -102,13 +106,12 @@ export default {
 .pokemon__game--main {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  max-width: 100%;
+  width: 80%;
   height: 100%;
   justify-items: center;
   margin: auto;
   padding: 0 30px;
   position: relative;
-  background-color: #49d0b0;
   background-image: url(../../public/pokeball.png);
   background-size: contain;
   background-position-x: right;

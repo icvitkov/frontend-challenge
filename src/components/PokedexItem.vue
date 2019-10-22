@@ -1,10 +1,10 @@
 <template>
   <div>
     <div v-if="this.pokemonName" class="pokemon-item">
-      <p class="guessed">#{{id}} {{pokemonName}}</p>
+      <p class="guessed name">#{{id}} {{pokemonName}}</p>
       <img class="image" :src="img" />
     </div>
-    <div v-else class="pokemon-item">
+    <div v-else class="pokemon-item default__list">
       <p>#{{id}}</p>
       <i class="fas fa-question"></i>
     </div>
@@ -18,8 +18,17 @@ export default {
     pokemonName: String,
     img: String,
     id: Number,
-    stats: Array
+    stats: Array,
+    type1: String,
+    type2: String
   },
+
+  data(){
+    return{
+      pokemontype2: this.type2,
+      pokemontype1: this.type1,
+    }
+  }
 
 };
 </script>
@@ -28,10 +37,13 @@ export default {
 .pokemon-item {
   display: grid;
   grid-template-rows: 1fr 3fr;
-  border-radius: 5px;
   height: 200px;
-  background-color: #49d0b0;
   justify-content: center;
+  background-image: url(../../public/pokeball.png);
+  background-size: cover;
+  background-position-x: right;
+  background-position-y: bottom;
+  background-repeat: no-repeat;
 }
 .image {
   height: 100px;
