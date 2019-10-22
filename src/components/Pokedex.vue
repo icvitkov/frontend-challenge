@@ -1,22 +1,22 @@
 <template>
   <div class="pokedex-container">
+    <div @click="closeModal">X</div>
     <div class="pokedex__list" v-if="pokemonList">
       <pokemon-item class="default__list" :class="[pokemon.type1]"
         v-for="pokemon in pokemonList"
         :key="pokemon.id"
-        :pokemonName="pokemon.name"
-        :id="pokemon.id"
-        :img="pokemon.img"
+        :pokemon="pokemon"
+        @click.native="getPokemonStats(pokemon)"
       ></pokemon-item>
     </div>
     <div v-else>Nema pokemona</div>
-    <pokemon-stats></pokemon-stats><!-- bind jedan po jedan -->
+    <pokemon-stats v-if="currentPokemon" :pokemon="currentPokemon"></pokemon-stats>
   </div>
 </template>
 
 <script>
 import PokemonItem from "@/components/PokedexItem.vue";
-import PokemonStats from "@/components/PokedexStats.vue";
+import PokemonStats from "@/components/PokemonStats.vue";
 
 export default {
   name: "home",
@@ -26,18 +26,26 @@ export default {
   },
   data() {
     return {
+      search: '',
       /*   pokemonList: this.$store.state.pokemonAll */
-      pokemonList: this.$store.state.pokemonAll,
-      id: 1
+      // pokemonList: this.$store.state.pokemonAll,
+      currentPokemon: null
 
     };
   },
-  mounted() {
-    this.console();
+  computed: {
+    pokemonList() {
+      return this.$store.state.pokemonAll;
+    }
   },
   methods: {
-    console() {
-      console.log("bla ", this.pokemonList);
+    closeModal() {
+      console.log("closing modal");
+      this.$emit('closePokedex');
+    },
+    getPokemonStats(pokemon) {
+      console.log("bla ", pokemon);
+      this.currentPokemon = pokemon;
     }
   }
 };

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div v-if="this.pokemonName" class="pokemon-item">
-      <p class="guessed name">#{{id}} {{pokemonName}}</p>
-      <img class="image" :src="img" />
+    <div v-if="pokemon.name" class="pokemon-item">
+      <p class="guessed name">#{{pokemon.id}} {{pokemon.name}}</p>
+      <img class="image" :src="pokemon.img" />
     </div>
     <div v-else class="pokemon-item default__list">
-      <p>#{{id}}</p>
+      <p>#{{pokemon.id}}</p>
       <i class="fas fa-question"></i>
     </div>
   </div>
@@ -15,21 +15,8 @@
 export default {
   name: "PokemonItem",
   props: {
-    pokemonName: String,
-    img: String,
-    id: Number,
-    stats: Array,
-    type1: String,
-    type2: String
-  },
-
-  data(){
-    return{
-      pokemontype2: this.type2,
-      pokemontype1: this.type1,
-    }
+    pokemon: Object
   }
-
 };
 </script>
 

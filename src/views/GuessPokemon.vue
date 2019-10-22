@@ -17,18 +17,24 @@
         <br />
         <button @click="checkAnswer">Provjeri</button>
         <button @click="randomPokemon">Novi pokemon</button>
+        <button @click="isPokedexVisible = true">Otvori pokedex</button>
       </div>
     </div>
-    <pokedex></pokedex>
+    <pokedex v-if="isPokedexVisible" @closePokedex="isPokedexVisible = false"></pokedex>
   </div>
 </template>
 
 <script>
+import Pokedex from '@/components/Pokedex'
+
 export default {
   name: "GuessPokemon",
-
+  components: {
+    Pokedex
+  },
   data() {
     return {
+      isPokedexVisible: false,
       pokemon: null,
       pokemonType: null,
       pokemonType2: null,

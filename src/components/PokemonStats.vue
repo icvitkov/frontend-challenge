@@ -1,15 +1,15 @@
 <template>
-  <div class="pokemon-stats">
-     <div v-if="this.pokemonName" class="pokemon__stats--main default" :class="[type1]">
-      <p class="name">#{{id}} {{pokemonName}}</p>
-      <img class="image" :src="img" />
+  <div class="pokemon-stats" v-if="pokemon">
+     <div class="pokemon__stats--main default" :class="[pokemon.type1]">
+      <p class="name">#{{pokemon.id}} {{pokemon.name}}</p>
+      <img class="image" :src="pokemon.img" />
       <div class="types">
-          <div class="type" v-if="type2">{{type2}} </div>
-          <div class="type">{{type1}} </div>
+          <div class="type" v-if="pokemon.type2">{{pokemon.type2}} </div>
+          <div class="type">{{pokemon.type1}} </div>
       </div>
       <div class="pokemon__stats--container">
-          <div class="pokemon__stat">
-              bla
+          <div class="pokemon__stat" v-for="(stat, key) in pokemon.stats" :key="key">
+              <span>{{stat.stat.name}}</span>-<span>{{stat.base_stat}}</span>
           </div>
       </div>
     </div>
@@ -21,22 +21,8 @@
 export default {
   name: "PokedexStats",
   props: {
-    pokemonName: String,
-    img: String,
-    id: Number,
-    stats: Array,
-    type1: String,
-    type2: String
-  },
-
-  data() {
-      return{
-
-      }
+    pokemon: Object
   }
-
-
-
 };
 </script>
 
@@ -46,6 +32,7 @@ export default {
   background-position-x: right;
   background-position-y: bottom;
   background-repeat: no-repeat;
+ 
     }
     .pokemon__stat{
         border-bottom: #ffffff57 3px solid;
