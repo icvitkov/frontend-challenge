@@ -1,11 +1,11 @@
 body{
     position: relative;
     width: 100%;
-    height: 100%;
     left: 0;
     margin: 0;
     border-color:#ffffff57;
 }
+
 
 button{
     border: none;
@@ -33,11 +33,12 @@ input{
     text-transform: capitalize;
 }
 .default{
-    background-color: #49d0b0;
+    background: rgba(71, 109, 212, 0.562);
+   
 }
 
 .default__list{
-    background-color: #49d0b0;
+    background: rgb(71, 109, 212);
     border-radius: 5px;
 }
 
@@ -46,5 +47,25 @@ input{
 }
 
 .fire{
-    background: rgb(197, 70, 70);
+    background: rgba(197, 70, 70, 0.753);
+}
+
+.fairy{
+    background: rgba(255, 187, 187, 0.719);
+}
+
+.electric{
+    background: rgb(241, 209, 125);
+}
+
+.rock{
+    background: #c2775ed7;
+}
+
+.psychic{
+    background: rgba(95, 56, 139, 0.596);
+}
+
+.grass{
+    background-color: #49d0b1;
 }

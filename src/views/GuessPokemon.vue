@@ -2,30 +2,35 @@
   <div class="pokemon__game" v-if="pokemon">
     <div class="pokemon__game--main default" :class="[pokemonType2, pokemonType]">
       <div class="pokemon__game--container">
-        <p>Nasumični pokemon: {{pokemon.name}}</p>
-        <div  class="pokemon__img--container">
-          <img :src="pokemon.sprites.front_default" alt />
-       <!--    <p>Tip: {{pokemonType}}</p>
-          <p v-if="this.pokemonType2">Tip: {{pokemonType2}}</p> -->
+        <div class="pokemon__img--container">
+          <img :src="pokemon.sprites.front_default" alt v-if="this.correct < 1" />
+          <p class="won" v-else>YOU WON!</p>
         </div>
       </div>
       <div class="progressbar__container">
-        <div class="progressbar__status" :style="{width: percent + '%'}"> </div>
+        {{correct}} / 151
+        <div class="progressbar__status" :style="{width: percent + '%'}"></div>
       </div>
       <div class="pokemon__game--answer">
-        <input v-model="answer" type="text" />
-        <br />
-        <button @click="checkAnswer">Provjeri</button>
-        <button @click="randomPokemon">Novi pokemon</button>
-        <button @click="isPokedexVisible = true">Otvori pokedex</button>
+        <input v-model="answer" type="text" placeholder="Enter name" />
+        <div class="buttons" v-if="this.correct < 1">
+          <button @click="checkAnswer">Check</button>
+          <button @click="randomPokemon">Next</button>
+        </div>
+        <div class="buttons" v-else>
+          <button @click="restart">Restart</button>
+        </div>
+        <button @click="openPokedex">Pokedex</button>
       </div>
     </div>
-    <pokedex v-if="isPokedexVisible" @closePokedex="isPokedexVisible = false"></pokedex>
+    <modal name="pokedex-modal" width="78%" height="60%" overlayTransition="overlay-fade">
+      <pokedex></pokedex>
+    </modal>
   </div>
 </template>
 
 <script>
-import Pokedex from '@/components/Pokedex'
+import Pokedex from "@/components/Pokedex";
 
 export default {
   name: "GuessPokemon",
@@ -34,7 +39,6 @@ export default {
   },
   data() {
     return {
-      isPokedexVisible: false,
       pokemon: null,
       pokemonType: null,
       pokemonType2: null,
@@ -48,32 +52,34 @@ export default {
     this.createPokemonList();
     this.randomPokemon();
   },
-  updated(){
+  updated() {
     this.calcCorrect();
   },
   methods: {
+    openPokedex() {
+      this.$modal.show("pokedex-modal");
+    },
     createPokemonList() {
       let pokemonList = {};
-      let max = 15;
+      let max = 151;
       for (let min = 1; min <= max; min++) {
         pokemonList[min] = {
           id: min
         };
       }
       this.$store.state.pokemonAll = pokemonList;
-      console.log("id svih pokemona: ", typeof(this.$store.state.pokemonAll[2].id));
+  
     },
 
     randomNumber() {
       let min = 1;
-      let max = 15;
+      let max = 151;
       let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
       if (this.$store.state.pokemonAll[randomNum].name) {
         return this.randomNumber(); // recursive function
       } else {
         return randomNum;
       }
-    
     },
 
     async randomPokemon() {
@@ -99,22 +105,24 @@ export default {
           type1: this.pokemon.types[0].type.name,
           type2: this.pokemonType2
         };
-        console.log(
-          "točno," + this.$store.state.pokemonAll[this.pokemon.id].type1
-        );
-        console.log("Pokemon broj: ", this.$store.state.pokemonAll);
+      
         this.randomPokemon();
         this.answer = "";
         this.correct++;
       } else {
         this.randomPokemon();
         this.answer = "";
-         console.log("id svih pokemona: ", typeof(this.pokemon.types[0].type.name));
       }
     },
     calcCorrect() {
-      let max = 15;
-      this.percent = (this.correct/max)*100;
+      let max = 151;
+      this.percent = (this.correct / max) * 100;
+    },
+    restart() {
+      this.$store.state.pokemonAll = {};
+      this.correct = 0;
+      this.createPokemonList();
+      this.randomPokemon();
     }
   }
 };
@@ -125,37 +133,30 @@ export default {
 .pokemon__game--main {
   display: grid;
   grid-template-rows: 2fr 1fr 1fr;
-  width: 80%;
+
   height: 100%;
+
   justify-items: center;
-  margin: 10% auto;
-  padding: 0 30px;
+
   position: relative;
-  background-image: url(../../public/pokeball.png);
+
+  background-image: url(/img/pokeball.db55b153.png);
   background-size: contain;
   background-position-x: right;
   background-position-y: bottom;
   background-repeat: no-repeat;
 }
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 
 .pokemon__img--container {
   display: grid;
+  
 }
-
+.pokemon__game--container{
+align-self: center;
+}
+.buttons {
+  display: block;
+}
 img {
   height: 200px;
   width: auto;
@@ -165,16 +166,37 @@ img {
 .pokemon__game--answer {
   align-self: center;
 }
-.progressbar__container{
-  width: 80%;
-  background: #ffffff57;
+.progressbar__container {
+  position: relative;
+  width: 40%;
+  background: #ffffff3d;
   height: 20px;
+  border-radius: 5px;
+  color: #ffffff57;
+}
+.progressbar__status {
+  width: 20%;
+  background: #ffffb185;
+  height: 20px;
+  margin-top: -19px;
+  z-index: 2;
   border-radius: 5px;
 }
-.progressbar__status{
-  width: 20%;
-  background: #ffffb1a6;
-  height: 20px;
-  border-radius: 5px;
+::placeholder {
+  color: #ffffffb2;
+}
+.won {
+  font-size: 25px;
+  color: white;
+}
+
+  /* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .progressbar__container{
+    width: 80%;
+  }
+  input{
+    padding: 0 10px;
+  }
 }
 </style>

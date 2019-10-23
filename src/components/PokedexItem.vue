@@ -43,10 +43,11 @@ export default {
 }
 
 p{
-  font-size: 20px;
   color: #ffffff57;
 }
 .guessed{
   color: white;
 }
+
+
 </style>

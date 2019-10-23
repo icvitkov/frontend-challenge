@@ -5,6 +5,9 @@ import store from './store'
 
 Vue.config.productionTip = false;
 
+import VModal from 'vue-js-modal'
+Vue.use(VModal)
+
 new Vue({
   router,
   store,
