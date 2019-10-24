@@ -3,25 +3,29 @@
     <div class="pokemon__game--main default" :class="[pokemonType2, pokemonType]">
       <div class="pokemon__game--container">
         <div class="pokemon__img--container">
-          {{correct}} aaaaa {{$store.state.numberOfPokemons}}
           <img :src="pokemon.sprites.front_default" alt v-if="this.correct !== $store.state.numberOfPokemons " />
           <p class="won" v-else>YOU WON!</p>
         </div>
       </div>
-      <div class="progressbar__container">
+      <!-- <div class="progressbar__container">
         {{correct}} / {{$store.state.numberOfPokemons}}
         <div class="progressbar__status" :style="{width: percent + '%'}"></div>
-      </div>
+      </div> -->
+      <progress class="nes-progress is-pattern" :value="correct" :max="$store.state.numberOfPokemons"></progress>
+      <p>{{correct}} / {{$store.state.numberOfPokemons}}</p>
+
       <div class="pokemon__game--answer">
-        <input v-model="answer" type="text" placeholder="Enter name" />
+    
+      <input  class="nes-input" v-model="answer" type="text" placeholder="Enter name" @keyup.enter="checkAnswer">
+
         <div class="buttons" v-if="this.correct < $store.state.numberOfPokemons">
-          <button @click="checkAnswer">Check</button>
-          <button @click="randomPokemon">Next</button>
+          <button class="nes-btn is-success" @click="checkAnswer">Check</button>
+          <button class="nes-btn is-primary" @click="randomPokemon">Next</button>
         </div>
         <div class="buttons" v-else>
-          <button @click="restart">Restart</button>
+          <button class="nes-btn is-warning" @click="restart">Restart</button>
         </div>
-        <button @click="openPokedex">Pokedex</button>
+        <button class="nes-btn is-error" @click="openPokedex">Pokedex</button>
       </div>
     </div>
     <modal name="pokedex-modal" width="78%" height="60%" overlayTransition="overlay-fade">
@@ -145,6 +149,7 @@ export default {
   background-repeat: no-repeat;
 }
 
+
 .pokemon__img--container {
   display: grid;
   
@@ -153,7 +158,10 @@ export default {
 align-self: center;
 }
 .buttons {
-  display: block;
+  display: inline;
+}
+.nes-btn {
+  margin: 10px;
 }
 img {
   height: 200px;
@@ -164,25 +172,11 @@ img {
 .pokemon__game--answer {
   align-self: center;
 }
-.progressbar__container {
-  position: relative;
+
+.nes-progress{
   width: 40%;
-  background: #ffffff3d;
-  height: 20px;
-  border-radius: 5px;
-  color: #ffffff57;
 }
-.progressbar__status {
-  width: 20%;
-  background: #ffffb185;
-  height: 20px;
-  margin-top: -19px;
-  z-index: 2;
-  border-radius: 5px;
-}
-::placeholder {
-  color: #ffffffb2;
-}
+
 .won {
   font-size: 25px;
   color: white;
@@ -190,11 +184,18 @@ img {
 
   /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .progressbar__container{
-    width: 80%;
-  }
-  input{
-    padding: 0 10px;
-  }
+  .nes-progress{
+  width: 80%;
+}
+.nes-input{
+  width: 100%;
+  display: block;
+}
+}
+</style>
+
+<style>
+#app > div.pokemon__game > div.v--modal-overlay > div > div.v--modal-box.v--modal{
+   border: 4px solid black;
 }
 </style>

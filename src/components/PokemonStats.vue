@@ -4,13 +4,13 @@
       <p class="name">#{{pokemon.id}} {{pokemon.name}}</p>
       <img class="image" :src="pokemon.img" />
       <div class="types">
-        <div class="type" v-if="pokemon.type2">{{pokemon.type2}}</div>
-        <div class="type">{{pokemon.type1}}</div>
+        <span class="type" v-if="pokemon.type2">{{pokemon.type2}} | </span>
+        <span class="type">{{pokemon.type1}}</span>
       </div>
     </div>
     <div class="pokemon__stats--container">
       <div class="pokemon__stat" v-for="(stat, key) in pokemon.stats" :key="key">
-        <span class="name">{{stat.stat.name}}</span>
+        <span>{{stat.stat.name}}</span>
         <span class="number">{{stat.base_stat}}</span>
       </div>
     </div>
@@ -33,7 +33,6 @@ export default {
   justify-content: center;
   text-align: center;
   color: white;
-  border-radius: 5px;
   background-position-x: right;
   background-position-y: bottom;
   background-repeat: no-repeat;
@@ -44,27 +43,34 @@ export default {
   grid-template-columns: 1fr 1fr;
   padding: 10px;
 }
-.pokemon-stats{
-    margin: 0 15px;
-    overflow: scroll;
+.pokemon-stats {
+  margin: 0 15px;
+  overflow: scroll;
 }
 
-.pokemon__stats--container{
-    padding: 15px 0 0 0;
-}
-.type {
-  display: inline-block;
-  margin: 10px;
-  background: #ffffff57;
-  border-radius: 25px;
-  padding: 10px 20px;
-  color: white;
-}
-.number{
-    text-align: right;
+.pokemon__stats--container {
+  padding: 15px 0 0 0;
 }
 
-img{
-    justify-self: center;
+.number {
+  text-align: right;
+}
+
+img {
+  justify-self: center;
+}
+
+.name {
+  padding: 10px 0 0 0;
+}
+.types {
+  padding: 0 5px 5px 0;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .pokemon-stats{
+    margin: 0;
+  }
 }
 </style>

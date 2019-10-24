@@ -2,7 +2,9 @@
   <div class="pokedex-container">
     <!-- <div @click="closeModal">X</div> -->
     <div class="pokedex__list" v-if="pokemonList">
-      <pokemon-item class="default__list" :class="[pokemon.type2, pokemon.type1]"
+      <pokemon-item
+        class="default__list"
+        :class="[pokemon.type2, pokemon.type1]"
         v-for="pokemon in pokemonList"
         :key="pokemon.id"
         :pokemon="pokemon"
@@ -26,9 +28,8 @@ export default {
   },
   data() {
     return {
-      search: '',
+      search: "",
       currentPokemon: null
-
     };
   },
   computed: {
@@ -56,42 +57,46 @@ export default {
   padding-right: 10px;
 }
 
-.pokedex-container{
-    display: grid;
-    grid-template-columns: 57% 40%;
-    width: 100%;
-    margin: 15px;
-    height: 100%;
+.pokedex-container {
+  display: grid;
+  grid-template-columns: 57% 40%;
+  width: 100%;
+  margin: 15px;
+  height: 100%;
 }
 ::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: transparent; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #746f72b6; 
-    border-radius: 25px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background:#555153b8; 
-  }
+  width: 10px;
+}
 
-  /* Extra small devices (phones, 600px and down) */
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #746f72b6;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #000000;
+}
+
+/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .pokedex-container{
-  grid-template-columns: 45% 50%;
-  margin: 5px;
+
+  .pokedex-container {
+    width: 98%;
+    grid-template-columns: 50% 50%;
+    margin: 5px;
+    font-size: 8px;
   }
 
-  .pokedex__list{
+  .pokedex__list {
     grid-template-columns: 1fr;
+    padding: 0;
   }
+
 }
 </style>

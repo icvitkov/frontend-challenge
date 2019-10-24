@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/rules">Rules</router-link> |
-      <a href="http://github.com/icvitkov" target="_blank">GitHub Profile</a> |
+      <a href="http://github.com/icvitkov" target="_blank">GitHub</a> |
       <a href="http://icvitkov.github.io" target="_blank">CV</a> 
     </div>
     <router-view/>
@@ -12,11 +12,12 @@
 
 <style>
 #app {
-  font-family: 'Raleway', sans-serif;
+font-family: 'Press Start 2P', regular;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #333536e7;
+  font-size: 10px;
 }
 
 #nav {
