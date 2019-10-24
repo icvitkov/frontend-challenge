@@ -1,6 +1,6 @@
 <template>
   <div class="pokemon-stats" v-if="pokemon">
-    <div class="pokemon__stats--main default" :class="[pokemon.type1]">
+    <div class="pokemon__stats--main default" :class="[pokemon.type2, pokemon.type1]">
       <p class="name">#{{pokemon.id}} {{pokemon.name}}</p>
       <img class="image" :src="pokemon.img" />
       <div class="types">
@@ -46,6 +46,7 @@ export default {
 }
 .pokemon-stats{
     margin: 0 15px;
+    overflow: scroll;
 }
 
 .pokemon__stats--container{

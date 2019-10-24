@@ -2,7 +2,7 @@
   <div class="pokedex-container">
     <!-- <div @click="closeModal">X</div> -->
     <div class="pokedex__list" v-if="pokemonList">
-      <pokemon-item class="default__list" :class="[pokemon.type1]"
+      <pokemon-item class="default__list" :class="[pokemon.type2, pokemon.type1]"
         v-for="pokemon in pokemonList"
         :key="pokemon.id"
         :pokemon="pokemon"
@@ -74,13 +74,13 @@ export default {
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #fdd2eb83; 
+    background: #746f72b6; 
     border-radius: 25px;
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background:#fae2f0; 
+    background:#555153b8; 
   }
 
   /* Extra small devices (phones, 600px and down) */

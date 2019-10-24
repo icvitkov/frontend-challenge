@@ -3,17 +3,18 @@
     <div class="pokemon__game--main default" :class="[pokemonType2, pokemonType]">
       <div class="pokemon__game--container">
         <div class="pokemon__img--container">
-          <img :src="pokemon.sprites.front_default" alt v-if="this.correct < 1" />
+          {{correct}} aaaaa {{$store.state.numberOfPokemons}}
+          <img :src="pokemon.sprites.front_default" alt v-if="this.correct !== $store.state.numberOfPokemons " />
           <p class="won" v-else>YOU WON!</p>
         </div>
       </div>
       <div class="progressbar__container">
-        {{correct}} / 151
+        {{correct}} / {{$store.state.numberOfPokemons}}
         <div class="progressbar__status" :style="{width: percent + '%'}"></div>
       </div>
       <div class="pokemon__game--answer">
         <input v-model="answer" type="text" placeholder="Enter name" />
-        <div class="buttons" v-if="this.correct < 1">
+        <div class="buttons" v-if="this.correct < $store.state.numberOfPokemons">
           <button @click="checkAnswer">Check</button>
           <button @click="randomPokemon">Next</button>
         </div>
@@ -61,8 +62,7 @@ export default {
     },
     createPokemonList() {
       let pokemonList = {};
-      let max = 151;
-      for (let min = 1; min <= max; min++) {
+      for (let min = 1; min <= this.$store.state.numberOfPokemons; min++) {
         pokemonList[min] = {
           id: min
         };
@@ -73,8 +73,7 @@ export default {
 
     randomNumber() {
       let min = 1;
-      let max = 151;
-      let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+      let randomNum = Math.floor(Math.random() * (this.$store.state.numberOfPokemons - min + 1)) + min;
       if (this.$store.state.pokemonAll[randomNum].name) {
         return this.randomNumber(); // recursive function
       } else {
@@ -115,8 +114,7 @@ export default {
       }
     },
     calcCorrect() {
-      let max = 151;
-      this.percent = (this.correct / max) * 100;
+      this.percent = (this.correct / this.$store.state.numberOfPokemons) * 100;
     },
     restart() {
       this.$store.state.pokemonAll = {};
