@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="pokemon.name" class="pokemon-item">
-      <p class="guessed name">#{{pokemon.id}} {{pokemon.name}}</p>
+    <div v-if="pokemon.name" class="pokemon-item nes-pointer">
+      <p class="name guessed">#{{pokemon.id}} {{pokemon.name}}</p>
       <img class="image" :src="pokemon.img" />
     </div>
     <div v-else class="pokemon-item default__list">
@@ -36,18 +36,17 @@ export default {
   height: 100px;
   justify-self: center;
 }
-.fas{
+.fas {
   font-size: 50px;
   color: #ffffff57;
   margin-top: 25px;
 }
 
-p{
+p {
   color: #ffffff57;
+  padding: 10px 0 0 0;
 }
-.guessed{
+.guessed {
   color: white;
 }
-
-
 </style>
