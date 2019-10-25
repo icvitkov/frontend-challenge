@@ -90,3 +90,13 @@ Need to get in touch?
 ## Legal
 
 Pokémon and Pokémon character names are trademarks of Nintendo.
+
+# How to start project in development mode
+
+- ```git clone```
+- ```cd frontend-challange```
+- ```git checkout pokedex```
+- ```npm install```
+- ```npm run serve```
+
+
