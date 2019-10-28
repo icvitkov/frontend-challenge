@@ -3,7 +3,7 @@
     <!-- <div @click="closeModal">X</div> -->
     <div class="pokedex__list" v-if="pokemonList">
       <pokemon-item
-        class="default__list"
+        class="default"
         :class="[pokemon.type2, pokemon.type1]"
         v-for="pokemon in pokemonList"
         :key="pokemon.id"

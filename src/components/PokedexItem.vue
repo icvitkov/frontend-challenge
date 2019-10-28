@@ -4,7 +4,7 @@
       <p class="name guessed">#{{pokemon.id}} {{pokemon.name}}</p>
       <img class="image" :src="pokemon.img" />
     </div>
-    <div v-else class="pokemon-item default__list">
+    <div v-else class="pokemon-item default">
       <p>#{{pokemon.id}}</p>
       <i class="fas fa-question"></i>
     </div>

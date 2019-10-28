@@ -6,7 +6,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     numberOfPokemons: 151,
-    pokemonAll: {}
+    pokemonAll: {},
+    pokemonType1: "",
+    pokemonType2: "",
   },
   mutations: {},
   actions: {},

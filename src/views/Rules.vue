@@ -22,7 +22,8 @@ export default {
 
 <style scoped>
 .rules {
-  padding: 0 15px;
+  padding: 25px;
   text-align: left;
 }
+
 </style>

@@ -91,10 +91,13 @@ export default {
       const pokemon = await response.json();
       this.pokemon = pokemon;
       this.pokemonType = pokemon.types[0].type.name;
+      this.$store.state.pokemonType1= this.pokemonType;
       if (pokemon.types[1]) {
         this.pokemonType2 = pokemon.types[1].type.name;
+        this.$store.state.pokemonType2= this.pokemonType2;
       } else {
         this.pokemonType2 = "";
+        this.$store.state.pokemonType2= "";
       }
     },
 
@@ -132,16 +135,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.pokemon__game{
+  height: 90%;
+}
 .pokemon__game--main {
   display: grid;
   grid-template-rows: 2fr 1fr 1fr;
-
   height: 100%;
-
+  padding: 0 0 10% 0;
   justify-items: center;
-
   position: relative;
-
   background-image: url(/img/pokeball.db55b153.png);
   background-size: contain;
   background-position-x: right;
