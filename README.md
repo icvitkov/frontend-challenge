@@ -100,3 +100,6 @@ Pokémon and Pokémon character names are trademarks of Nintendo.
 - ```npm run serve```
 
 
+# PokemonGame on Netlify
+
+https://pokemon-game.netlify.com
